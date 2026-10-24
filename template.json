@@ -1,0 +1,10 @@
+{
+  "id": "next-app",
+  "label": "Next.js (create-next-app)",
+  "upstream": "npx create-next-app@latest",
+  "port": 3000,
+  "healthPath": "/",
+  "stack": "A real create-next-app project (App Router, TypeScript, ESLint, no Tailwind)",
+  "notes": "Scaffolder runs at build time; next dev listens on 0.0.0.0 and the port from PORT. Next.js owns its server, so this is bring-your-own, not a Flisk frontend provider.",
+  "resourceCommand": "flisk resource <name> --type bring-your-own --stack <stack> --dockerfile ./Dockerfile --health-path / --yes"
+}

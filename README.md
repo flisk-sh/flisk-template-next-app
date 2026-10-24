@@ -1,18 +1,17 @@
 # create-next-app
 
-**Stack:** a real `create-next-app` project (App Router, TypeScript, ESLint, no Tailwind, no `src/` directory)
+**Stack:** a real `create-next-app` project (App Router, TypeScript, ESLint, no Tailwind, no `src/`)
 
-**Notes:** scaffolder runs at build time with `--ts --app --no-tailwind --eslint --no-src-dir --use-npm --yes --disable-git`
-(it installs dependencies itself); `next dev -H 0.0.0.0 -p $PORT` makes the dev server reachable and uses the port Flisk
-assigns. Next.js owns its build and server runtime, so this is a bring-your-own resource, not a Flisk frontend provider.
-The Next.js version is whatever `create-next-app@latest` ships.
+**Notes:** scaffolder runs at build time; `next dev -H 0.0.0.0 -p $PORT`. Next.js owns its server, so this is bring-your-own, not a Flisk frontend provider.
+
+Flisk bring-your-own template. The container contract is in [docs/byo.md](https://github.com/flisk-sh/flisk/blob/main/docs/byo.md).
 
 ## Check it
 
-Needs Docker. Builds the image, runs it with `PORT=4000` and expects HTTP 200 on `/`:
+Needs Docker. CI runs the same check on every pull request (`.github/workflows/verify.yml`): build, run with `PORT=4000`, expect HTTP 200 on `/`.
 
 ```bash
-VERIFY_WAIT_SECONDS=90 tests/e2e/resource-types/bring-your-own/verify-byo-example.sh create-next-app /
+docker build -t template . && docker run --rm -e PORT=4000 -p 4000:4000 template
 ```
 
 ## Register it in a Flisk project
@@ -21,5 +20,4 @@ VERIFY_WAIT_SECONDS=90 tests/e2e/resource-types/bring-your-own/verify-byo-exampl
 flisk resource next-web --type bring-your-own --stack shop --dockerfile ./Dockerfile --health-path / --yes
 ```
 
-Use a resource name that is unique across Flisk projects sharing one Docker daemon. See
-[../README.md](../README.md) and [docs/byo.md](../../../docs/byo.md) for the container contract.
+Use a resource name that is unique across Flisk projects sharing one Docker daemon.
