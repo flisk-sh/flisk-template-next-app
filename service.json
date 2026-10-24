@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "appName": "next-web",
+  "appType": "bring-your-own",
+  "stack": "shop",
+  "port": 3000,
+  "healthCheckPath": "/",
+  "dockerfile": "./Dockerfile",
+  "template": {
+    "id": "next-app",
+    "label": "Next.js (create-next-app)",
+    "upstream": "npx create-next-app@latest",
+    "description": "A real create-next-app project (App Router, TypeScript, ESLint, no Tailwind)",
+    "notes": "Scaffolder runs at build time; next dev listens on 0.0.0.0 and the port from PORT. Next.js owns its server, so this is bring-your-own, not a Flisk frontend provider."
+  }
+}
