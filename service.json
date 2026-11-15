@@ -6,6 +6,7 @@
   "port": 3000,
   "healthCheckPath": "/",
   "dockerfile": "./Dockerfile",
+  "webUi": true,
   "template": {
     "id": "next-app",
     "label": "Next.js (create-next-app)",
