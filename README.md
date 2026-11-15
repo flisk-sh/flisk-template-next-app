@@ -20,4 +20,6 @@ docker build -t template . && docker run --rm -e PORT=4000 -p 4000:4000 template
 flisk resource next-web --type bring-your-own --stack shop --dockerfile ./Dockerfile --health-path / --yes
 ```
 
+`service.json` sets `"webUi": true`, so the engine routes the app on its own host name instead of a path prefix: after `flisk up`, `flisk status` prints `http://next-web.<project>.localhost:8081`. Open that host-root URL — `<project>` is the Flisk project name (`shop` above), and the app is never served under `/api/next-web`.
+
 Use a resource name that is unique across Flisk projects sharing one Docker daemon.
