@@ -2,6 +2,7 @@
   "schemaVersion": 1,
   "appName": "next-web",
   "appType": "bring-your-own",
+  "webUi": true,
   "stack": "shop",
   "port": 3000,
   "healthCheckPath": "/",
