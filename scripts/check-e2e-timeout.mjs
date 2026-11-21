@@ -1,10 +1,10 @@
 import { readFileSync } from 'node:fs';
 
 const workflow = readFileSync(new URL('../.github/workflows/e2e.yml', import.meta.url), 'utf8');
-const job = /^  e2e:\n([\s\S]*)$/m.exec(workflow)?.[1] ?? '';
+const job = /^  e2e:\r?\n([\s\S]*)$/m.exec(workflow)?.[1] ?? '';
 const problems = [];
 
-const jobTimeout = /^\s+timeout-minutes:\s*(\d+)\s*$/m.exec(job)?.[1];
+const jobTimeout = /(?:^|\r?\n)[ \t]+timeout-minutes:[ \t]*(\d+)/.exec(job)?.[1];
 if (!jobTimeout || Number(jobTimeout) > 10) problems.push('jobs.e2e.timeout-minutes must be set to 10 or less');
 
 const runStart = job.indexOf('name: Run the template through flisk up');
