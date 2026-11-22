@@ -14,6 +14,8 @@ Needs Docker. CI runs the same check on every pull request (`.github/workflows/v
 docker build -t template . && docker run --rm -e PORT=4000 -p 4000:4000 template
 ```
 
+The Dockerfile pins the scaffolder at `npx --yes create-next-app@16.4.6`. To bump it, check the current release with `npm view create-next-app version`, update that one version and run the build above. CI rejects any `@latest` in the Dockerfile.
+
 ## Use it in a Flisk project
 
 This repo already includes a [`service.json`](service.json) that registers the resource as `next-web`, so Flisk picks it up automatically when this folder is inside a Flisk project.
