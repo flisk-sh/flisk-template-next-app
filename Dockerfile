@@ -6,6 +6,6 @@ RUN npx --yes create-next-app@16.4.6 app --ts --app --no-tailwind --eslint --no-
 WORKDIR /work/app
 RUN chown -R node:node .
 USER node
-HEALTHCHECK --interval=10s --timeout=3s --start-period=10s --retries=3 CMD nc -z 127.0.0.1 ${PORT:-3000} || exit 1
+HEALTHCHECK --interval=10s --timeout=3s --start-period=10s --retries=3 CMD node -e 'fetch("http://127.0.0.1:" + (process.env.PORT || 3000) + "/", { redirect: "manual" }).then(r => process.exit(r.ok ? 0 : 1), () => process.exit(1))'
 # next dev must listen beyond loopback (-H) and on the port Flisk assigns.
 CMD ["sh", "-c", "npx next dev -H 0.0.0.0 -p ${PORT:-3000}"]
