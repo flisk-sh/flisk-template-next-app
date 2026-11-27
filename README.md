@@ -8,7 +8,7 @@ Flisk bring-your-own template. The container contract is in [docs/byo.md](https:
 
 ## Check it
 
-Needs Docker. CI runs the same check on every pull request (`.github/workflows/verify.yml`): build, run with `PORT=4000`, expect HTTP 200 on `/`.
+Needs Docker. CI runs the same check on every pull request (`.github/workflows/verify.yml`): build, run with `PORT=4000`, expect HTTP 200 on `/`. The separate `e2e` job stops after 10 minutes and its `flisk up` step after 5, then prints `flisk status` and uploads the evidence before failing.
 
 ```bash
 docker build -t template . && docker run --rm -e PORT=4000 -p 4000:4000 template
